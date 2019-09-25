@@ -1,2 +1,2 @@
 # docker-protoc
-Protobuf compiler and plugins
+Protobuf compiler and plugins.
