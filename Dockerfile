@@ -48,5 +48,15 @@ RUN go get github.com/golang/protobuf/protoc-gen-go@v1.3.2 && \
 RUN pip3 install setuptools wheel && \
   pip3 install grpclib==0.3.0 mypy-protobuf==1.15
 
+RUN mkdir -p /protobuf/include && \
+    mkdir ~/git_tmp && \
+    cd ~/git_tmp && \
+    git clone https://github.com/envoyproxy/protoc-gen-validate && \
+    cd protoc-gen-validate && \
+    git checkout v0.1.0 && \
+    mv validate /protobuf/include && \
+    cd ~ && \
+    rm -rf git_tmp
+
 VOLUME /host
 WORKDIR /host
