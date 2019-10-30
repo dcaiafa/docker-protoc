@@ -1,23 +1,23 @@
 FROM debian:buster
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-            bzip2 \
-            ca-certificates \
-            curl \
-            g++ \
-            gcc \
-            git \
-            make \
-            python3-dev \
-            python3-pip \
-            ssh \
-            unzip \
-        && rm -rf /var/lib/apt/lists/*
+  bzip2 \
+  ca-certificates \
+  curl \
+  g++ \
+  gcc \
+  git \
+  make \
+  python3-dev \
+  python3-pip \
+  ssh \
+  unzip \
+  && rm -rf /var/lib/apt/lists/*
 
 # Install protobuf compiler.
 # https://github.com/protocolbuffers/protobuf/blob/master/src/README.md
 RUN mkdir ~/protobuf_tmp && \
-  cd ~/protobuf_tmp && \ 
+  cd ~/protobuf_tmp && \
   curl -L -o protobuf.zip https://github.com/protocolbuffers/protobuf/releases/download/v3.7.1/protoc-3.7.1-linux-x86_64.zip && \
   unzip protobuf.zip && \
   mv bin/* /usr/local/bin/ && \
@@ -46,17 +46,17 @@ RUN go get github.com/golang/protobuf/protoc-gen-go@v1.3.2 && \
 
 # Install Python dependencies.
 RUN pip3 install setuptools wheel && \
-  pip3 install grpclib==0.3.0 mypy-protobuf==1.15
+  pip3 install grpclib==0.3.0 mypy-protobuf==1.15 betterproto[compiler]==1.2.0
 
 RUN mkdir -p /protobuf/include && \
-    mkdir ~/git_tmp && \
-    cd ~/git_tmp && \
-    git clone https://github.com/envoyproxy/protoc-gen-validate && \
-    cd protoc-gen-validate && \
-    git checkout v0.1.0 && \
-    mv validate /protobuf/include && \
-    cd ~ && \
-    rm -rf git_tmp
+  mkdir ~/git_tmp && \
+  cd ~/git_tmp && \
+  git clone https://github.com/envoyproxy/protoc-gen-validate && \
+  cd protoc-gen-validate && \
+  git checkout v0.1.0 && \
+  mv validate /protobuf/include && \
+  cd ~ && \
+  rm -rf git_tmp
 
 VOLUME /host
 WORKDIR /host
