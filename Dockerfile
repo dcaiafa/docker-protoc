@@ -46,7 +46,7 @@ RUN go get github.com/golang/protobuf/protoc-gen-go@v1.3.2 && \
 
 # Install Python dependencies.
 RUN pip3 install setuptools wheel && \
-  pip3 install grpclib==0.3.0 mypy-protobuf==1.15 betterproto[compiler]==1.2.0
+  pip3 install grpclib==0.3.0 mypy-protobuf==1.15 betterproto[compiler]==1.2.1
 
 RUN mkdir -p /protobuf/include && \
   mkdir ~/git_tmp && \
