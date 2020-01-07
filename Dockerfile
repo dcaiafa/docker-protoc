@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   python3-pip \
   ssh \
   unzip \
+  graphviz \
   && rm -rf /var/lib/apt/lists/*
 
 # Install protobuf compiler.
@@ -57,6 +58,8 @@ RUN mkdir -p /protobuf/include && \
   mv validate /protobuf/include && \
   cd ~ && \
   rm -rf git_tmp
+
+RUN go get github.com/seamia/protodot
 
 VOLUME /host
 WORKDIR /host
